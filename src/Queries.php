@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace CmsIg\HttpList;
 
-class Queries
+final class Queries
 {
     /**
      * Regex fragments (without delimiters and anchors) matching the names of irrelevant query parameters.
@@ -49,13 +49,42 @@ class Queries
             'utm_creative_format',
             'utm_marketing_tactic',
             'gtm_debug',
+            '_ga',
             '_gl',
             // Google ads
             'gad',
+            'gad_source',
+            'gad_campaignid',
+            'gbraid',
+            'wbraid',
             'gclid',
+            'gclsrc',
             'dclid',
             // Facebook
             'fbclid',
+            // LinkedIn
+            'li_fat_id',
+            // TikTok
+            'ttclid',
+            // Twitter
+            'twclid',
+            // Yahoo
+            'yclid',
+            // Awin / Zanox
+            'zanpid',
+            // Mailchimp
+            'mc_cid',
+            'mc_eid',
+            // Instagram
+            'igshid',
+            // Impact
+            'irclickid',
+            // Pinterest
+            'epik',
+            // Branch.io
+            '_branch_match_id',
+            // etracker
+            'etcc_[a-z]+',
             // Microsoft Bing Ads.
             'msclkid',
             // HubSpot Ad Tracking Parameters

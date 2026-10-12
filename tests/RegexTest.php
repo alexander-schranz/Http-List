@@ -24,6 +24,8 @@ class RegexTest extends TestCase
         $this->assertTrue(Cookies::matches('_ga'));
         $this->assertTrue(Cookies::matches('_ga_ABC123'));
         $this->assertTrue(Cookies::matches('_dc_gtm_UA-1'));
+        $this->assertTrue(Cookies::matches('_GA_ABC123'));
+        $this->assertTrue(Cookies::matches('cookieconsent_STATUS'));
         $this->assertFalse(Cookies::matches('PHPSESSID'));
         $this->assertFalse(Cookies::matches('x_ga'));
         $this->assertFalse(Cookies::matches('_dc_gtm_'));
@@ -33,6 +35,9 @@ class RegexTest extends TestCase
     {
         $this->assertTrue(Queries::matches('utm_source'));
         $this->assertTrue(Queries::matches('gclid'));
+        $this->assertTrue(Queries::matches('li_fat_id'));
+        $this->assertTrue(Queries::matches('etcc_med'));
+        $this->assertTrue(Queries::matches('UTM_Source'));
         $this->assertFalse(Queries::matches('page'));
         $this->assertFalse(Queries::matches('utm_source_x'));
     }

@@ -11,14 +11,14 @@ composer require cmsig/http-list
 
 ## Usage
 
-Every entry is a regex fragment (no delimiters, no anchors), e.g. `_ga.*`.
+Every entry is a regex fragment (no delimiters, no anchors), e.g. `_ga.*`. Matching is anchored and case-insensitive.
 
 ```php
 use CmsIg\HttpList\Cookies;
 use CmsIg\HttpList\Queries;
 
 Cookies::getCookies();      // string[] of regex fragments
-Cookies::getCookiesRegex(); // one anchored regex: ~^(?:_ga.*|_gid|...)$~
+Cookies::getCookiesRegex(); // one anchored regex: ~^(?:_ga.*|_gid|...)$~i
 Cookies::matches('_ga_ABC123'); // true
 
 Queries::getQueries();

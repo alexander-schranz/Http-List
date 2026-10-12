@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace CmsIg\HttpList;
 
-class Cookies
+final class Cookies
 {
     /**
      * Regex fragments (without delimiters and anchors) matching the names of irrelevant cookies.

@@ -19,12 +19,12 @@ namespace CmsIg\HttpList;
 final class Regex
 {
     /**
-     * Combines regex fragments into one anchored regex: a single big regex is faster than many small ones.
+     * Combines regex fragments into one anchored, case-insensitive regex: a single big regex is faster than many small ones.
      *
      * @param string[] $fragments
      */
     public static function combine(array $fragments): string
     {
-        return '~^(?:' . \implode('|', \str_replace('~', '\~', $fragments)) . ')$~';
+        return '~^(?:' . \implode('|', \str_replace('~', '\~', $fragments)) . ')$~i';
     }
 }
