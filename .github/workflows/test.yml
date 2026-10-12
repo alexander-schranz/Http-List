@@ -1,0 +1,41 @@
+name: Test
+
+on:
+    pull_request:
+    push:
+        branches:
+            - main
+
+permissions:
+    contents: read
+
+jobs:
+    test:
+        name: "PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }})"
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php-version: ['8.2', '8.3', '8.4']
+                dependency-versions: ['lowest', 'highest']
+
+        steps:
+            - name: Checkout project
+              uses: actions/checkout@v4
+
+            - name: Install and configure PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-version }}
+                  tools: 'composer:v2'
+                  ini-values: memory_limit=-1, zend.assertions=1
+                  coverage: none
+
+            - name: Install composer dependencies
+              uses: ramsey/composer-install@v3
+              with:
+                  dependency-versions: ${{ matrix.dependency-versions }}
+
+            - name: Run tests
+              run: composer test
