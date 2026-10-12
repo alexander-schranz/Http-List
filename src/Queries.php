@@ -23,35 +23,23 @@ final class Queries
     public static function getQueries(): array
     {
         return [
+            // TYPO3 (legacy language parameter)
             'L',
-            // Matomo
-            'mtm_campaign',
-            'mtm_keyword',
-            'mtm_kwd',
-            'mtm_source',
-            'mtm_medium',
-            'mtm_content',
-            'mtm_cid',
-            'mtm_group',
-            'mtm_placement',
-            // Piwik
-            'pk_campaign',
-            'pk_kwd',
+
+            // Matomo / Piwik
+            'mtm_.*',
+            'matomo_.*',
+            'piwik_.*',
+            'pk_.*',
             '_stg_debug',
-            // Google
-            'utm_source',
-            'utm_medium',
-            'utm_campaign',
-            'utm_term',
-            'utm_content',
-            'utm_id',
-            'utm_source_platform',
-            'utm_creative_format',
-            'utm_marketing_tactic',
+
+            // Google Analytics / Tag Manager
+            'utm_.*',
             'gtm_debug',
             '_ga',
             '_gl',
-            // Google ads
+
+            // Google Ads
             'gad',
             'gad_source',
             'gad_campaignid',
@@ -60,56 +48,97 @@ final class Queries
             'gclid',
             'gclsrc',
             'dclid',
-            // Facebook
+            'ved',
+
+            // Google Custom Search
+            'cx',
+            'ie',
+            'cof',
+            'siteurl',
+
+            // Facebook / Instagram
             'fbclid',
+            'igshid',
+
             // LinkedIn
             'li_fat_id',
+
             // TikTok
             'ttclid',
+
             // Twitter
             'twclid',
+
             // Yahoo
             'yclid',
+
+            // Microsoft Bing Ads
+            'msclkid',
+            '_bta_.*',
+
             // Awin / Zanox
             'zanpid',
-            // Mailchimp
-            'mc_cid',
-            'mc_eid',
-            // Instagram
-            'igshid',
+
+            // Rakuten
+            'rtid',
+
             // Impact
             'irclickid',
+
             // Pinterest
             'epik',
+
             // Branch.io
             '_branch_match_id',
+
+            // Mailchimp
+            'mc_.*',
+
+            // SMS campaigns
+            'sms_click',
+            'sms_source',
+            'sms_uph',
+
+            // eBay
+            'mkcid',
+            'mkevt',
+            'mkrid',
+            'mkwid',
+            'toolid',
+
             // etracker
-            'etcc_[a-z]+',
-            // Microsoft Bing Ads.
-            'msclkid',
-            // HubSpot Ad Tracking Parameters
-            'hsa_acc',
-            'hsa_ad',
-            'hsa_cam',
-            'hsa_grp',
-            'hsa_kw',
-            'hsa_mt',
-            'hsa_net',
-            'hsa_src',
-            'hsa_tgt',
-            'hsa_ver',
-            'hsa_ol',
-            'hsa_la',
-            // HubSpot Email Tracking Parameters
+            'etcc_.*',
+
+            // HubSpot
+            'hsa_.*',
             '_hsenc',
             '_hsmi',
-            // HubSpot CTA Tracking Parameters
             '__hssc',
             '__hstc',
             '__hsfp',
             'hsCtaTracking',
-            // HubSpot Form Tracking Parameters
             'submissionGuid',
+
+            // Upsun URL normalization (no single tool named)
+            'campid',
+            'customid',
+            'dm_i',
+            'ef_id',
+            'gdffi',
+            'gdfms',
+            'gdftrk',
+            '_ke',
+            '_kx',
+            'nb_klid',
+            'ndclid',
+            'origin',
+            'pcrid',
+            'redirect_.*',
+            'trk_.*',
+            'sb_referer_host',
+            'ScCid',
+            'si',
+            's_kwcid',
         ];
     }
 

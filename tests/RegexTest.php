@@ -38,8 +38,11 @@ class RegexTest extends TestCase
         $this->assertTrue(Queries::matches('li_fat_id'));
         $this->assertTrue(Queries::matches('etcc_med'));
         $this->assertTrue(Queries::matches('UTM_Source'));
+        $this->assertTrue(Queries::matches('utm_anything_else'));
+        $this->assertTrue(Queries::matches('mc_foo'));
+        $this->assertTrue(Queries::matches('_bta_tid'));
         $this->assertFalse(Queries::matches('page'));
-        $this->assertFalse(Queries::matches('utm_source_x'));
+        $this->assertFalse(Queries::matches('utm'));
     }
 
     public function testAllFragmentsAreValidRegexes(): void
