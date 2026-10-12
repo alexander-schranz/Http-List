@@ -23,9 +23,6 @@ final class Queries
     public static function getQueries(): array
     {
         return [
-            // TYPO3 (legacy language parameter)
-            'L',
-
             // Matomo / Piwik
             'mtm_.*',
             'matomo_.*',
