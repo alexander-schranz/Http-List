@@ -21,28 +21,29 @@ class RegexTest extends TestCase
 {
     public function testCookies(): void
     {
-        $this->assertTrue(Cookies::matches('_ga'));
-        $this->assertTrue(Cookies::matches('_ga_ABC123'));
-        $this->assertTrue(Cookies::matches('_dc_gtm_UA-1'));
-        $this->assertTrue(Cookies::matches('_GA_ABC123'));
-        $this->assertTrue(Cookies::matches('cookieconsent_STATUS'));
-        $this->assertFalse(Cookies::matches('PHPSESSID'));
-        $this->assertFalse(Cookies::matches('x_ga'));
-        $this->assertFalse(Cookies::matches('_dc_gtm_'));
+        $this->assertSame(
+            ['_ga', '_ga_ABC123', '_dc_gtm_UA-1', '_GA_ABC123', 'cookieconsent_STATUS'],
+            Cookies::matches(['_ga', '_ga_ABC123', '_dc_gtm_UA-1', '_GA_ABC123', 'cookieconsent_STATUS', 'PHPSESSID', 'x_ga', '_dc_gtm_']),
+        );
     }
 
     public function testQueries(): void
     {
-        $this->assertTrue(Queries::matches('utm_source'));
-        $this->assertTrue(Queries::matches('gclid'));
-        $this->assertTrue(Queries::matches('li_fat_id'));
-        $this->assertTrue(Queries::matches('etcc_med'));
-        $this->assertTrue(Queries::matches('UTM_Source'));
-        $this->assertTrue(Queries::matches('utm_anything_else'));
-        $this->assertTrue(Queries::matches('mc_foo'));
-        $this->assertTrue(Queries::matches('_bta_tid'));
-        $this->assertFalse(Queries::matches('page'));
-        $this->assertFalse(Queries::matches('utm'));
+        $this->assertSame(
+            ['utm_source', 'gclid', 'li_fat_id', 'etcc_med', 'UTM_Source', 'utm_anything_else', 'mc_foo', '_bta_tid'],
+            Queries::matches(['utm_source', 'gclid', 'li_fat_id', 'etcc_med', 'UTM_Source', 'utm_anything_else', 'mc_foo', '_bta_tid', 'page', 'utm']),
+        );
+    }
+
+    public function testFindMatchesKeepsKeys(): void
+    {
+        $this->assertSame(
+            [1 => 'utm_source', 3 => 'gclid'],
+            Queries::matches(['page', 'utm_source', 'sort', 'gclid']),
+        );
+        $this->assertSame([], Queries::matches(['page']));
+        $this->assertSame([], Queries::matches([]));
+        $this->assertSame([0 => '_ga'], Cookies::matches(['_ga', 'PHPSESSID']));
     }
 
     public function testAllFragmentsAreValidRegexes(): void

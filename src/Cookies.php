@@ -73,7 +73,7 @@ final class Cookies
     }
 
     /**
-     * One anchored regex (with delimiters) matching the names of all irrelevant cookies.
+     * One anchored, case-insensitive regex (with delimiters) matching the names of all irrelevant cookies.
      */
     public static function getCookiesRegex(): string
     {
@@ -81,10 +81,17 @@ final class Cookies
     }
 
     /**
-     * Whether the given cookie name is irrelevant.
+     * The irrelevant names out of the given cookie names, with one regex call for all of them. Keys are kept.
+     *
+     * @param array<array-key, string> $names
+     *
+     * @return array<array-key, string>
      */
-    public static function matches(string $name): bool
+    public static function matches(array $names): array
     {
-        return 1 === \preg_match(self::getCookiesRegex(), $name);
+        /** @var array<array-key, string>|false $matches preg_grep keeps the keys and values of the given strings */
+        $matches = \preg_grep(self::getCookiesRegex(), $names);
+
+        return false === $matches ? [] : $matches;
     }
 }

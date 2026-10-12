@@ -19,11 +19,11 @@ use CmsIg\HttpList\Queries;
 
 Cookies::getCookies();      // string[] of regex fragments
 Cookies::getCookiesRegex(); // one anchored regex: ~^(?:_ga.*|_gid|...)$~i
-Cookies::matches('_ga_ABC123'); // true
+Cookies::matches(['_ga_ABC123', 'PHPSESSID']); // [0 => '_ga_ABC123']
 
 Queries::getQueries();
 Queries::getQueriesRegex();
-Queries::matches('utm_source'); // true
+Queries::matches(['page', 'utm_source']); // [1 => 'utm_source']
 ```
 
 ### Symfony HttpFoundation

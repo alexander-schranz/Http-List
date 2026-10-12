@@ -31,7 +31,7 @@ final class StripRequest
     public static function stripCookies(Request $request): void
     {
         $cookies = $request->cookies->all();
-        $remaining = \array_filter($cookies, static fn ($name): bool => !Cookies::matches((string) $name), \ARRAY_FILTER_USE_KEY);
+        $remaining = \array_diff_key($cookies, \array_flip(Cookies::matches(\array_keys($cookies))));
 
         if (\count($remaining) === \count($cookies)) {
             return;
@@ -56,7 +56,7 @@ final class StripRequest
     public static function stripQueries(Request $request): void
     {
         $queries = $request->query->all();
-        $remaining = \array_filter($queries, static fn ($name): bool => !Queries::matches((string) $name), \ARRAY_FILTER_USE_KEY);
+        $remaining = \array_diff_key($queries, \array_flip(Queries::matches(\array_keys($queries))));
 
         if (\count($remaining) === \count($queries)) {
             return;

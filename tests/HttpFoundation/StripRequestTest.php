@@ -41,4 +41,16 @@ class StripRequestTest extends TestCase
 
         $this->assertFalse($request->headers->has('Cookie'));
     }
+
+    public function testNumericNames(): void
+    {
+        $request = Request::create('/?123=a&utm_source=x', 'GET', [], ['456' => 'b', '_ga' => '1']);
+
+        StripRequest::strip($request);
+
+        $this->assertCount(1, $request->query);
+        $this->assertSame('a', $request->query->get('123'));
+        $this->assertCount(1, $request->cookies);
+        $this->assertSame('b', $request->cookies->get('456'));
+    }
 }
