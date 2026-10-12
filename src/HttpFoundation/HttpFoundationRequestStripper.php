@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Removes irrelevant cookies and query parameters from a Symfony request.
  */
-final class StripRequest
+final class HttpFoundationRequestStripper
 {
     public static function strip(Request $request): void
     {

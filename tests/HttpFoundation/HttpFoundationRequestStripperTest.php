@@ -13,18 +13,18 @@ declare(strict_types=1);
 
 namespace CmsIg\HttpList\Tests\HttpFoundation;
 
-use CmsIg\HttpList\HttpFoundation\StripRequest;
+use CmsIg\HttpList\HttpFoundation\HttpFoundationRequestStripper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class StripRequestTest extends TestCase
+class HttpFoundationRequestStripperTest extends TestCase
 {
     public function testStrip(): void
     {
         $request = Request::create('/?page=2&utm_source=x&gclid=1', 'GET', [], ['_ga' => '1', 'PHPSESSID' => 'abc']);
         $request->headers->set('Cookie', '_ga=1; PHPSESSID=abc');
 
-        StripRequest::strip($request);
+        HttpFoundationRequestStripper::strip($request);
 
         $this->assertSame(['page' => '2'], $request->query->all());
         $this->assertSame('page=2', $request->getQueryString());
@@ -37,7 +37,7 @@ class StripRequestTest extends TestCase
         $request = Request::create('/', 'GET', [], ['_ga' => '1']);
         $request->headers->set('Cookie', '_ga=1');
 
-        StripRequest::strip($request);
+        HttpFoundationRequestStripper::strip($request);
 
         $this->assertFalse($request->headers->has('Cookie'));
     }
@@ -46,7 +46,7 @@ class StripRequestTest extends TestCase
     {
         $request = Request::create('/?123=a&utm_source=x', 'GET', [], ['456' => 'b', '_ga' => '1']);
 
-        StripRequest::strip($request);
+        HttpFoundationRequestStripper::strip($request);
 
         $this->assertCount(1, $request->query);
         $this->assertSame('a', $request->query->get('123'));

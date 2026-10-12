@@ -22,8 +22,8 @@
         "symfony/http-foundation": "<5.4 || >=9.0"
     },
     "suggest": {
-        "psr/http-message": "To strip PSR-7 requests via CmsIg\\HttpList\\Psr7\\StripRequest",
-        "symfony/http-foundation": "To strip Symfony requests via CmsIg\\HttpList\\HttpFoundation\\StripRequest"
+        "psr/http-message": "To strip PSR-7 requests via CmsIg\\HttpList\\Psr7\\Psr7RequestStripper",
+        "symfony/http-foundation": "To strip Symfony requests via CmsIg\\HttpList\\HttpFoundation\\HttpFoundationRequestStripper"
     },
     "autoload": {
         "psr-4": {

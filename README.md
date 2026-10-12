@@ -31,9 +31,9 @@ Queries::matches(['page', 'utm_source']); // [1 => 'utm_source']
 Requires `symfony/http-foundation`. Strips in place, including the `Cookie` header and `QUERY_STRING`:
 
 ```php
-use CmsIg\HttpList\HttpFoundation\StripRequest;
+use CmsIg\HttpList\HttpFoundation\HttpFoundationRequestStripper;
 
-StripRequest::strip($request); // or stripCookies() / stripQueries()
+HttpFoundationRequestStripper::strip($request); // or stripCookies() / stripQueries()
 ```
 
 ### PSR-7
@@ -41,7 +41,7 @@ StripRequest::strip($request); // or stripCookies() / stripQueries()
 Requires `psr/http-message`. Returns a new request:
 
 ```php
-use CmsIg\HttpList\Psr7\StripRequest;
+use CmsIg\HttpList\Psr7\Psr7RequestStripper;
 
-$request = StripRequest::strip($request); // or stripCookies() / stripQueries()
+$request = Psr7RequestStripper::strip($request); // or stripCookies() / stripQueries()
 ```

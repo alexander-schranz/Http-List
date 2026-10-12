@@ -20,13 +20,15 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Removes irrelevant cookies and query parameters from a PSR-7 server request.
  */
-final class StripRequest
+final class Psr7RequestStripper
 {
+    #[\NoDiscard('the request is immutable, use the returned request')]
     public static function strip(ServerRequestInterface $request): ServerRequestInterface
     {
         return self::stripQueries(self::stripCookies($request));
     }
 
+    #[\NoDiscard('the request is immutable, use the returned request')]
     public static function stripCookies(ServerRequestInterface $request): ServerRequestInterface
     {
         $cookies = $request->getCookieParams();
@@ -50,6 +52,7 @@ final class StripRequest
             : $request->withHeader('Cookie', \implode('; ', $pairs));
     }
 
+    #[\NoDiscard('the request is immutable, use the returned request')]
     public static function stripQueries(ServerRequestInterface $request): ServerRequestInterface
     {
         $queries = $request->getQueryParams();

@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\HttpList\Tests\Psr7;
 
-use CmsIg\HttpList\Psr7\StripRequest;
+use CmsIg\HttpList\Psr7\Psr7RequestStripper;
 use Nyholm\Psr7\ServerRequest;
 use PHPUnit\Framework\TestCase;
 
-class StripRequestTest extends TestCase
+class Psr7RequestStripperTest extends TestCase
 {
     public function testStrip(): void
     {
@@ -25,7 +25,7 @@ class StripRequestTest extends TestCase
             ->withQueryParams(['page' => '2', 'utm_source' => 'x'])
             ->withCookieParams(['_ga' => '1', 'PHPSESSID' => 'abc']);
 
-        $stripped = StripRequest::strip($request);
+        $stripped = Psr7RequestStripper::strip($request);
 
         $this->assertSame(['page' => '2'], $stripped->getQueryParams());
         $this->assertSame('page=2', $stripped->getUri()->getQuery());
